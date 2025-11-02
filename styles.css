@@ -1,0 +1,45 @@
+:root{
+  --bg:#0f172a; --panel:#111827; --card:#1f2937;
+  --text:#e5e7eb; --muted:#9ca3af; --accent:#d97706; --green:#22c55e;
+}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial; color:var(--text); background:var(--bg);}
+.container{max-width:1100px; margin:0 auto; padding:0 16px;}
+.hidden{display:none !important}
+.muted{color:var(--muted)} .small{font-size:.9rem}
+
+.topbar{position:sticky; top:0; background:#0b1220; border-bottom:1px solid #0e1627; z-index:10}
+.topbar .container{display:flex; align-items:center; height:56px; gap:12px}
+.brand{font-weight:800; letter-spacing:.4px}
+.spacer{flex:1}
+.btn{background:#2b374a; border:1px solid #31425f; color:#fff; padding:8px 12px; border-radius:8px; cursor:pointer}
+.btn:hover{filter:brightness(1.05)}
+.btn.primary{background:var(--accent); border-color:#ae6006}
+.btn.secondary{background:#2b2d33; border-color:#3a3f4a}
+.btn.small{padding:6px 10px; font-size:.9rem}
+.input{background:var(--card); border:1px solid #2a364b; color:var(--text); padding:10px 12px; border-radius:8px; width:100%}
+select.input{padding:9px 10px}
+
+.hero{padding:24px 0}
+.hero-row{display:flex; gap:16px; align-items:end; justify-content:space-between}
+.filters{display:flex; gap:10px; margin-top:14px}
+
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; margin:18px 0 40px}
+.card{background:var(--panel); border:1px solid #20304b; border-radius:14px; padding:16px; box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.card .title{font-weight:600}
+.card .price{color:var(--green); font-weight:800}
+
+.item-img{width:100%; height:180px; object-fit:cover; border-radius:10px; background:#121a2a}
+
+.modal{border:none; padding:0; background:transparent}
+.modal::backdrop{background:rgba(0,0,0,.55)}
+.modal .card{max-width:560px; width:92vw}
+.row{display:flex; gap:10px; align-items:center}
+.end{justify-content:flex-end}
+.list{list-style:none; padding:0; margin:8px 0}
+.list li{display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #263044}
+.error{color:#ff6b6b; margin-top:8px}
+.actions{display:flex; gap:8px}
+
+.badge{display:inline-block; background:#24314a; border:1px solid #31425f; padding:3px 8px; border-radius:999px; font-size:.85rem; color:#cbd5e1}
+.meta{color:#9fb1cc; font-size:.85rem}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Online Yard Sale</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="topbar">
+    <div class="container">
+      <div class="brand">Online Yard Sale</div>
+      <div class="spacer"></div>
+      <div id="nav-auth" class="nav-auth">
+        <span id="user-email" class="muted"></span>
+        <button id="btn-login" class="btn small">Login</button>
+        <button id="btn-register" class="btn small">Register</button>
+        <button id="btn-logout" class="btn small secondary hidden">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="container hero">
+    <div class="hero-row">
+      <div>
+        <h1>Buy & sell locally</h1>
+        <p class="muted">Create an account to post your items. Browse by categories. All moderated.</p>
+      </div>
+      <div class="actions">
+        <button id="btn-new" class="btn primary">+ New Listing</button>
+        <button id="btn-admin" class="btn secondary hidden">Admin</button>
+      </div>
+    </div>
+
+    <div class="filters">
+      <input id="search" class="input" placeholder="Search listings..." />
+      <select id="category-filter" class="input"></select>
+      <button id="btn-clear" class="btn">Clear</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <!-- Modal: Auth -->
+  <dialog id="auth-modal" class="modal">
+    <form method="dialog" class="card">
+      <h3 id="auth-title">Login</h3>
+      <label>Email <input type="email" id="auth-email" required /></label>
+      <label>Password <input type="password" id="auth-pass" required /></label>
+      <div class="row">
+        <button id="auth-submit" class="btn primary" value="submit">Submit</button>
+        <button class="btn" value="cancel">Cancel</button>
+      </div>
+      <p class="muted small" id="auth-switch"></p>
+      <p class="error" id="auth-error"></p>
+    </form>
+  </dialog>
+
+  <!-- Modal: New/Edit Listing -->
+  <dialog id="listing-modal" class="modal">
+    <form method="dialog" class="card" id="listing-form">
+      <h3 id="listing-title">New Listing</h3>
+      <label>Title <input id="l-title" required /></label>
+      <label>Price (USD) <input id="l-price" required /></label>
+      <label>Category
+        <select id="l-category" required></select>
+      </label>
+      <label>Description
+        <textarea id="l-desc" rows="4"></textarea>
+      </label>
+      <label>Image
+        <input type="file" id="l-image" accept="image/*" />
+      </label>
+      <div class="row">
+        <button id="listing-save" class="btn primary" value="submit">Save</button>
+        <button class="btn" value="cancel">Cancel</button>
+      </div>
+      <input type="hidden" id="l-id" />
+      <p class="error" id="listing-error"></p>
+    </form>
+  </dialog>
+
+  <!-- Modal: Admin -->
+  <dialog id="admin-modal" class="modal">
+    <form method="dialog" class="card">
+      <h3>Admin</h3>
+      <p class="muted small">Admins can manage categories and delete/deactivate any listing.</p>
+      <h4>Categories</h4>
+      <div class="row">
+        <input id="cat-name" class="input" placeholder="Name" />
+        <input id="cat-slug" class="input" placeholder="slug-example" />
+        <button id="cat-add" class="btn">Add</button>
+      </div>
+      <ul id="cat-list" class="list"></ul>
+      <div class="row end">
+        <button class="btn" value="cancel">Close</button>
+      </div>
+      <p class="error" id="admin-error"></p>
+    </form>
+  </dialog>
+
+  <script src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

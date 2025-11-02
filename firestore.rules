@@ -1,0 +1,36 @@
+// Firestore security rules for Yard Sale
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function adminEmails() {
+      return get(/databases/$(database)/documents/meta/admins).data.emails;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (request.auth.token.email in adminEmails());
+    }
+
+    match /meta/{document=**} {
+      // Only admins can read/write admin metadata
+      allow read, write: if isAdmin();
+    }
+
+    match /categories/{catId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /listings/{id} {
+      allow read: if true;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isSignedIn() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+    }
+  }
+}

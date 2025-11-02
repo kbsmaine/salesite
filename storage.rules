@@ -1,0 +1,19 @@
+// Storage security rules for Yard Sale images
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isSignedIn() { return request.auth != null; }
+    function adminEmails() {
+      return get(/databases/$(database)/documents/meta/admins).data.emails;
+    }
+    function isAdmin() { return isSignedIn() && (request.auth.token.email in adminEmails()); }
+
+    // Images under listings/{uid}/...
+    match /listings/{uid}/{allPaths=**} {
+      allow read: if true;
+      allow write: if isSignedIn() && (uid == request.auth.uid || isAdmin())
+        && request.resource.size < 8 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
